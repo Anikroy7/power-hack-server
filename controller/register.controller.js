@@ -31,7 +31,7 @@ module.exports.registration = async (req, res) => {
         }
     }
     catch (error) {
-        res.status(401).json({
+        return res.status(401).json({
             error: error.message,
             message: 'failed to register'
         })

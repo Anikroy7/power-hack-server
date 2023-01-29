@@ -5,6 +5,6 @@ const verityJwt = require('../middleware/verifyJwt');
 const router = express.Router();
 
 router.route('/')
-    .post(verityJwt, registerController.registration)
+    .post(registerController.registration)
 
 module.exports = router

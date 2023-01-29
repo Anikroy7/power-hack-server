@@ -20,8 +20,11 @@ app.use('/api', billingRouter)
 
 // Error handler
 app.use((err, req, res, next) => {
-    console.log(err.message);
-    res.status(400).send({ message: "Something invalid occured" })
+
+    res.status(500).send({
+        message: "Something invalid occured",
+        error: err
+    })
 })
 
 
