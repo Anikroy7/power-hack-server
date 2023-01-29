@@ -1,19 +1,20 @@
 const express = require('express');
 const billingController = require('../controller/billing.controller');
-const verityJwt = require('../middleware/verifyJwt');
+const verifyJwt = require('../middleware/verifyJwt');
 
 
 const router = express.Router();
 
 router.route('/billing')
-    .post(verityJwt, billingController.createBilling)
+    .post(verifyJwt, billingController.createBilling)
 
 router.route('/billing-list')
-    .get(verityJwt, billingController.getBillingList)
+    .get(verifyJwt, billingController.getBillingList)
 
 router.route('/update-billing/:id')
-    .patch(billingController.updateBilling)
+    .patch(verifyJwt, billingController.updateBilling)
 
-
+router.route('/delete-billing/:id')
+    .delete(verifyJwt, billingController.deleteBilling)
 
 module.exports = router

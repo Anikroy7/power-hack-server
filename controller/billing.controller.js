@@ -44,15 +44,45 @@ module.exports.getBillingList = async (req, res) => {
 
 //------------------------UPDATE BILLING-----------------------
 
-module.exports.updateBilling = (req, res, next) => {
+module.exports.updateBilling = async (req, res, next) => {
     try {
         const { id } = req.params;
-        console.log(id);
+        const filter = { _id: id }
+        const doc = req.body
+        const updatedDoc = {
+            $set: { ...doc },
+
+        };
+        const options = { upsert: true };
+        const result = await Billing.updateOne(filter, updatedDoc, options);
         return res.status(200).json({
             message: 'Billing information update successfully',
-            // data: billing
+            data: result
+        });
+
+
+    } catch (err) {
+        return res.status(500).json({
+            message: 'Fialed to update  billing information',
+            error: err.message
+        });
+    }
+}
+
+//------------------------DELETE BILLING-----------------------
+
+module.exports.deleteBilling = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await Billing.deleteOne({ _id: id })
+        return res.status(200).json({
+            message: 'Billing information deleted successfully',
+            data: result
         });
     } catch (err) {
-        return res.status(500).json({ message: 'Fialed to update  billing information' });
+        return res.status(500).json({
+            message: 'Failed to delete billing',
+            err: err.message
+        });
     }
 }
