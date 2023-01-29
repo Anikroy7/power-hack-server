@@ -1,9 +1,10 @@
 const express = require('express');
 const registerController = require('../controller/register.controller');
+const verityJwt = require('../middleware/verifyJwt');
 
 const router = express.Router();
 
 router.route('/')
-    .get(registerController.postUser)
+    .post(verityJwt, registerController.postUser)
 
 module.exports = router

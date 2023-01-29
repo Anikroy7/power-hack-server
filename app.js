@@ -11,4 +11,13 @@ app.use(express.json())
 // routes
 app.use('/api/registration', ragistrationRouter)
 
+
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.log(err.message);
+    res.status(400).send({ message: "Something invalid occured" })
+})
+
+
 module.exports = app;
