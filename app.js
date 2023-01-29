@@ -2,15 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 require('dotenv').config()
-const ragistrationRouter = require("./routes/register.route")
+const registrationRouter = require("./routes/register.route")
+const loginRouter = require("./routes/login.router")
 
 // middleware
 app.use(cors())
 app.use(express.json())
 
 // routes
-app.use('/api/registration', ragistrationRouter)
-
+app.use('/api/registration', registrationRouter)
+app.use('/api/login', loginRouter)
 
 
 // Error handler
